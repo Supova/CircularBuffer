@@ -2,15 +2,15 @@
 #define CIRCULAR_BUFFER_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
-#define BUFFER_SIZE 100
+#define BUFFER_SIZE 128
 
 typedef struct{
-    int buffer[BUFFER_SIZE];
-    int head;
-    int tail;
-    int capacity;
-    bool full_flag;
+    uint8_t buffer[BUFFER_SIZE];
+    uint16_t head;
+    uint16_t tail;
+    bool full;
 }CircularBuffer;
 
 #endif

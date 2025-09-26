@@ -6,14 +6,15 @@ BUILD_DIR = build
 
 # Source files
 CB_SRC = src/circular_buffer.c
-CB_OBJ = $(BUILD_DIR)/circular_buffer.o
+CB_OBJ = $(BUILD_DIR)/src/circular_buffer.o
 
 MAIN_SRC = src/main.c
-MAIN_OBJ = $(BUILD_DIR)/main.o
+MAIN_OBJ = $(BUILD_DIR)/src/main.o
 MAIN_BIN = $(BUILD_DIR)/main
 
+# Test files
 TEST_SRC = tests/c/test_runner.c $(wildcard tests/c/test_*.c)
-TEST_OBJ = $(TEST_SRC:%.c=$(BUILD_DIR)/%.o)
+TEST_OBJ = $(TEST_SRC:tests/c/%.c=$(BUILD_DIR)/tests/c/%.o)
 TEST_BIN = $(BUILD_DIR)/test
 
 # Ensure build directories exist
@@ -35,8 +36,11 @@ test: $(CB_OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) -o $(TEST_BIN) $^
 	./$(TEST_BIN)
 
-# Pattern rule for compiling .c to .o in build directory
-$(BUILD_DIR)/%.o: %.c
+# Pattern rules for compiling .c to .o in build directory
+$(BUILD_DIR)/src/%.o: src/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/tests/c/%.o: tests/c/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Clean target

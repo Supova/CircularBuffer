@@ -13,4 +13,6 @@ typedef struct{
     bool full;
 }CircularBuffer;
 
+void CircularBuffer_Init(CircularBuffer *cb);
+
 #endif

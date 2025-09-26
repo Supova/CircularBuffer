@@ -8,8 +8,3 @@ void test_CircularBuffer_Init(){
     assert(cb.tail == 0);
     assert(cb.full == false);
 }
-
-int main() {
-    test_CircularBuffer_Init();
-    return 0;
-}

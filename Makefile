@@ -13,7 +13,7 @@ MAIN_OBJ = $(BUILD_DIR)/src/main.o
 MAIN_BIN = $(BUILD_DIR)/main
 
 # Test files
-TEST_SRC = tests/c/test_runner.c $(wildcard tests/c/test_*.c)
+TEST_SRC = tests/c/test_main.c $(wildcard tests/c/test_*.c)
 TEST_OBJ = $(TEST_SRC:tests/c/%.c=$(BUILD_DIR)/tests/c/%.o)
 TEST_BIN = $(BUILD_DIR)/test
 
@@ -29,6 +29,7 @@ $(MAIN_BIN): $(CB_OBJ) $(MAIN_OBJ)
 
 # Run main program
 run: $(MAIN_BIN)
+	@echo "Running main..."
 	./$(MAIN_BIN)
 
 # Build and run tests

@@ -17,7 +17,7 @@ void CircularBuffer_Init(CircularBuffer *cb){
 }
 
 
-int CircularBuffer_Enqueue(CircularBuffer *cb, cb_element_t data){
+int CircularBuffer_Enqueue(CircularBuffer *cb, uint8_t data){
     if (cb == NULL){
         return CB_ERROR_NULL;
     }

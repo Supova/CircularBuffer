@@ -9,6 +9,7 @@
 #define CB_SUCCESS 0
 #define CB_ERROR_FULL -1
 #define CB_ERROR_NULL -2
+#define CB_ERROR_EMPTY -3
 
 typedef struct{
     uint8_t buffer[BUFFER_SIZE];
@@ -19,5 +20,5 @@ typedef struct{
 
 void CircularBuffer_Init(CircularBuffer *cb);
 int CircularBuffer_Enqueue(CircularBuffer *cb, uint8_t data);
-
+int CircularBuffer_Dequeue(CircularBuffer *cb, uint8_t *data);
 #endif

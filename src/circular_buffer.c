@@ -33,3 +33,19 @@ int CircularBuffer_Enqueue(CircularBuffer *cb, uint8_t data){
 
     return CB_SUCCESS;
 }
+
+int CircularBuffer_Dequeue(CircularBuffer *cb, uint8_t *data){
+    if (cb == NULL){
+        return CB_ERROR_NULL;
+    }
+
+    if (cb->count == 0){
+        return CB_ERROR_EMPTY;
+    }
+
+    *data = cb->buffer[cb->tail];
+    cb->tail = (cb->tail + 1) % BUFFER_SIZE;
+    cb->count--;
+
+    return CB_SUCCESS;
+}

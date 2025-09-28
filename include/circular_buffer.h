@@ -21,4 +21,6 @@ typedef struct{
 void CircularBuffer_Init(CircularBuffer *cb);
 int CircularBuffer_Enqueue(CircularBuffer *cb, uint8_t data);
 int CircularBuffer_Dequeue(CircularBuffer *cb, uint8_t *data);
+int CircularBuffer_Peek(CircularBuffer *cb, uint8_t *data);
+
 #endif

@@ -1,11 +1,6 @@
 #include "circular_buffer.h"
 #include <stddef.h>
 
-#define CB_SUCCESS 0
-#define CB_ERROR_FULL -1
-#define CB_ERROR_NULL -2
-
-
 void CircularBuffer_Init(CircularBuffer *cb){
     if (cb == NULL){
         return;
@@ -22,7 +17,7 @@ int CircularBuffer_Enqueue(CircularBuffer *cb, uint8_t data){
     }
     
     // reject data overwrite
-    if (cb->count == BUFFER_SIZE){
+    if (CircularBuffer_IsFull(cb)){
         return CB_ERROR_FULL;
     }
 
@@ -38,7 +33,7 @@ int CircularBuffer_Dequeue(CircularBuffer *cb, uint8_t *data){
         return CB_ERROR_NULL;
     }
 
-    if (cb->count == 0){
+    if (CircularBuffer_IsEmpty(cb)){
         return CB_ERROR_EMPTY;
     }
 
@@ -54,7 +49,7 @@ int CircularBuffer_Peek(CircularBuffer *cb, uint8_t *data){
         return CB_ERROR_NULL;
     }
 
-    if (cb->count == 0){
+    if (CircularBuffer_IsEmpty(cb)){
         return CB_ERROR_EMPTY;
     }
     
@@ -62,3 +57,40 @@ int CircularBuffer_Peek(CircularBuffer *cb, uint8_t *data){
 
     return CB_SUCCESS;
 }
+
+bool CircularBuffer_IsFull(const CircularBuffer *cb){
+    if (cb == NULL){
+        return false;
+    }
+
+    return cb->count == BUFFER_SIZE;
+}
+
+bool CircularBuffer_IsEmpty(const CircularBuffer *cb){
+    if (cb == NULL){
+        return true;
+    }
+
+    return cb->count == 0;
+}
+
+uint16_t CircularBuffer_Count(const CircularBuffer *cb){
+     if (cb == NULL){
+        return 0;
+    }
+
+    return cb->count;
+}
+
+void CircularBuffer_Reset(CircularBuffer *cb){
+     if (cb == NULL){
+        return;
+    }
+
+    cb->head = 0;
+    cb->tail = 0;
+    cb->count = 0;
+}
+
+
+
